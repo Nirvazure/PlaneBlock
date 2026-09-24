@@ -1,12 +1,18 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
+import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp } from "lucide-react"
 import { GameBoard } from "./game-board"
 import { Button } from "./ui/button"
-import { Card } from "./ui/card"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select"
 import { toast } from "sonner"
 import type { GameState, Airplane, Direction, CellState } from "@/lib/game-types"
+
+const directions: { value: Direction; label: string; Icon: typeof ArrowUp }[] = [
+  { value: "up", label: "向上", Icon: ArrowUp },
+  { value: "right", label: "向右", Icon: ArrowRight },
+  { value: "down", label: "向下", Icon: ArrowDown },
+  { value: "left", label: "向左", Icon: ArrowLeft },
+]
 
 interface GameSetupProps {
   gameState: GameState
@@ -21,6 +27,7 @@ export function GameSetup({ gameState, setGameState, disabled = false }: GameSet
       .fill(null)
       .map(() => Array(10).fill("empty")),
   )
+  const [hoveredCell, setHoveredCell] = useState<{ row: number; col: number } | null>(null)
 
   const currentPlayerAirplanes = gameState.playerAirplanes[gameState.currentPlayer]
   const canPlaceMore = currentPlayerAirplanes.length < 3
@@ -85,6 +92,50 @@ export function GameSetup({ gameState, setGameState, disabled = false }: GameSet
     return shape.every((pos) => currentBoard[pos.row][pos.col] === "empty")
   }
 
+  const getPreviewBoard = (row: number, col: number, direction: Direction) => {
+    const nextPreview = Array(10)
+      .fill(null)
+      .map(() => Array(10).fill("empty" as CellState))
+
+    if (canPlaceAirplane(row, col, direction)) {
+      getAirplaneShape(row, col, direction).forEach((pos) => {
+        nextPreview[pos.row][pos.col] = pos.type === "head" ? "airplane-head" : "airplane-body"
+      })
+    }
+
+    return nextPreview
+  }
+
+  const changeDirection = (direction: Direction) => {
+    setSelectedDirection(direction)
+    if (hoveredCell && canPlaceMore && !disabled) {
+      setPreviewBoard(getPreviewBoard(hoveredCell.row, hoveredCell.col, direction))
+    }
+  }
+
+  const changeDirectionRef = useRef(changeDirection)
+  changeDirectionRef.current = changeDirection
+
+  useEffect(() => {
+    if (gameState.phase !== "setup" || !canPlaceMore || disabled) return
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.repeat || event.altKey || event.ctrlKey || event.metaKey) return
+      if (event.target instanceof HTMLElement && event.target.closest("input, textarea, select, [role='combobox'], [contenteditable='true']")) return
+
+      const key = event.key.toLowerCase()
+      if (key !== "q" && key !== "e") return
+
+      event.preventDefault()
+      const currentIndex = directions.findIndex((direction) => direction.value === selectedDirection)
+      const nextIndex = (currentIndex + (key === "e" ? 1 : directions.length - 1)) % directions.length
+      changeDirectionRef.current(directions[nextIndex].value)
+    }
+
+    window.addEventListener("keydown", handleKeyDown)
+    return () => window.removeEventListener("keydown", handleKeyDown)
+  }, [canPlaceMore, disabled, gameState.phase, selectedDirection])
+
   const placeAirplane = (headRow: number, headCol: number) => {
     if (disabled) return
     if (!canPlaceAirplane(headRow, headCol, selectedDirection)) {
@@ -130,27 +181,13 @@ export function GameSetup({ gameState, setGameState, disabled = false }: GameSet
         .fill(null)
         .map(() => Array(10).fill("empty")),
     )
+    setHoveredCell(null)
   }
 
   const handleCellHover = (row: number, col: number) => {
     if (!canPlaceMore) return
-
-    const newPreviewBoard = Array(10)
-      .fill(null)
-      .map(() => Array(10).fill("empty"))
-
-    if (canPlaceAirplane(row, col, selectedDirection)) {
-      const shape = getAirplaneShape(row, col, selectedDirection)
-      shape.forEach((pos) => {
-        if (pos.type === "head") {
-          newPreviewBoard[pos.row][pos.col] = "airplane-head"
-        } else {
-          newPreviewBoard[pos.row][pos.col] = "airplane-body"
-        }
-      })
-    }
-
-    setPreviewBoard(newPreviewBoard)
+    setHoveredCell({ row, col })
+    setPreviewBoard(getPreviewBoard(row, col, selectedDirection))
   }
 
   const nextPlayer = () => {
@@ -165,6 +202,7 @@ export function GameSetup({ gameState, setGameState, disabled = false }: GameSet
         .fill(null)
         .map(() => Array(10).fill("empty")),
     )
+    setHoveredCell(null)
   }
 
   const combinedBoard = gameState.playerBoards[gameState.currentPlayer].map((row, rowIndex) =>
@@ -175,45 +213,57 @@ export function GameSetup({ gameState, setGameState, disabled = false }: GameSet
   )
 
   return (
-    <Card className="p-4">
-      <div className="text-center mb-4">
-        <h2 className="text-sm font-bold mb-2">玩家 {gameState.currentPlayer} 布置飞机</h2>
-        <p className="text-xs text-muted-foreground">已放置 {currentPlayerAirplanes.length}/3 架飞机</p>
-        {canPlaceMore && <p className="text-xs text-primary mt-2">选择方向后，点击格子放置飞机机头</p>}
+    <div className="w-full min-h-[36rem] xl:h-full flex flex-col xl:justify-center">
+      <div className="text-center mb-6">
+        <h2 className="text-fluid-heading font-bold mb-2">
+          <span className={gameState.currentPlayer === 1 ? "text-player-one" : "text-player-two"}>玩家 {gameState.currentPlayer}</span> 布置飞机
+        </h2>
+        <p className="text-fluid-body text-muted-foreground">已放置 {currentPlayerAirplanes.length}/3 架飞机</p>
+        {canPlaceMore && <p className="text-fluid-body text-primary mt-2">选择方向后，点击格子放置飞机机头</p>}
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-6 min-w-0">
-        <div className="flex-1 min-w-0 w-full overflow-hidden">
+      <div className="w-full flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-12 min-w-0 max-w-6xl mx-auto">
+        <div className="w-full min-w-0 lg:w-[34rem] lg:flex-none flex justify-center overflow-hidden">
           <GameBoard
             board={combinedBoard}
             clickableBoard={gameState.playerBoards[gameState.currentPlayer]}
             airplanes={currentPlayerAirplanes}
             isOwn={true}
+            player={gameState.currentPlayer}
             onCellClick={canPlaceMore && !disabled ? placeAirplane : () => {}}
             onCellHover={canPlaceMore && !disabled ? handleCellHover : undefined}
             gamePhase="setup"
           />
         </div>
 
-        <div className="lg:w-80 space-y-6">
+        <div className="w-full max-w-sm lg:w-80 lg:max-w-none shrink-0 space-y-6">
           <div>
-            <label className="block text-sm font-medium mb-2">飞机方向</label>
-            <Select value={selectedDirection} onValueChange={(value: Direction) => setSelectedDirection(value)}>
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="up">向上 ↑</SelectItem>
-                <SelectItem value="down">向下 ↓</SelectItem>
-                <SelectItem value="left">向左 ←</SelectItem>
-                <SelectItem value="right">向右 →</SelectItem>
-              </SelectContent>
-            </Select>
+            <div className="mb-2 flex items-center justify-between gap-3">
+              <span className="text-fluid-body font-medium">飞机方向</span>
+              <span className="hidden text-fluid-label text-muted-foreground lg:inline">Q / E 旋转</span>
+            </div>
+            <div role="group" aria-label="飞机方向" className="grid grid-cols-4 gap-2">
+              {directions.map(({ value, label, Icon }) => (
+                <Button
+                  key={value}
+                  type="button"
+                  size="icon"
+                  variant={selectedDirection === value ? "default" : "outline"}
+                  aria-pressed={selectedDirection === value}
+                  aria-label={label}
+                  title={label}
+                  disabled={disabled || !canPlaceMore}
+                  onClick={() => changeDirection(value)}
+                >
+                  <Icon aria-hidden="true" />
+                </Button>
+              ))}
+            </div>
           </div>
 
           <div className="space-y-4">
-            <h3 className="text-xs font-bold">游戏规则</h3>
-            <ul className="text-xs text-muted-foreground space-y-2">
+            <h3 className="text-fluid-body font-bold">游戏规则</h3>
+            <ul className="text-fluid-body text-muted-foreground space-y-2">
               <li>• 每个玩家需要放置3架飞机</li>
               <li>• 飞机形状：机头1格 + 机翅5格 + 机尾3格</li>
               <li>• 飞机可以朝四个方向放置</li>
@@ -229,6 +279,6 @@ export function GameSetup({ gameState, setGameState, disabled = false }: GameSet
           )}
         </div>
       </div>
-    </Card>
+    </div>
   )
 }

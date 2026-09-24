@@ -10,20 +10,21 @@ interface GameBoardProps {
   onCellClick: (row: number, col: number) => void
   onCellHover?: (row: number, col: number) => void
   gamePhase: GamePhase
+  player?: 1 | 2
+  hitColorPlayer?: 1 | 2
   /** 用于判断可点击的棋盘；未传时与 board 相同（解决 preview 覆盖导致无法点击） */
   clickableBoard?: CellState[][]
   /** 同步中或禁用交互时设为 true */
   disabled?: boolean
 }
 
-export function GameBoard({ board, airplanes, isOwn, onCellClick, onCellHover, gamePhase, clickableBoard, disabled = false }: GameBoardProps) {
+export function GameBoard({ board, airplanes, isOwn, onCellClick, onCellHover, gamePhase, player, hitColorPlayer, clickableBoard, disabled = false }: GameBoardProps) {
   const boardForClick = clickableBoard ?? board
   const getCellContent = (row: number, col: number, cellState: CellState) => {
     switch (cellState) {
       case "airplane-head":
-        return "●"
       case "airplane-body":
-        return "★"
+        return ""
       case "hit":
         return "✕"
       case "destroyed":
@@ -37,13 +38,19 @@ export function GameBoard({ board, airplanes, isOwn, onCellClick, onCellHover, g
 
   const getCellClassName = (cellState: CellState, isClickable: boolean) => {
     return cn(
-      "flex-1 min-w-0 aspect-square sm:flex-none sm:w-7 sm:h-7 md:w-8 md:h-8 border-[2px] border-[var(--nes-border-dark)] flex items-center justify-center text-[10px] sm:text-xs font-bold transition-colors",
+      "flex-1 min-w-0 aspect-square sm:flex-none sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-10 lg:h-10 border-[2px] border-[var(--nes-border-dark)] flex items-center justify-center text-fluid-label font-bold transition-colors",
       {
       "bg-game-water": cellState === "empty",
-      "bg-game-airplane text-game-airplane-head": cellState === "airplane-body",
-      "bg-game-airplane-head text-primary-foreground": cellState === "airplane-head",
-      "bg-game-hit text-destructive-foreground": cellState === "hit",
-      "bg-game-destroyed text-destructive-foreground": cellState === "destroyed",
+      "bg-game-airplane text-game-airplane-head": cellState === "airplane-body" && player === undefined,
+      "bg-game-airplane-head text-primary-foreground": cellState === "airplane-head" && player === undefined,
+      "bg-player-one-plane": cellState === "airplane-body" && player === 1,
+      "bg-player-one-head": cellState === "airplane-head" && player === 1,
+      "bg-player-two-plane": cellState === "airplane-body" && player === 2,
+      "bg-player-two-head": cellState === "airplane-head" && player === 2,
+      "bg-game-hit text-destructive-foreground": cellState === "hit" && hitColorPlayer === undefined,
+      "bg-game-destroyed text-destructive-foreground": cellState === "destroyed" && hitColorPlayer === undefined,
+      "bg-player-one text-background": (cellState === "hit" || cellState === "destroyed") && hitColorPlayer === 1,
+      "bg-player-two text-background": (cellState === "hit" || cellState === "destroyed") && hitColorPlayer === 2,
       "bg-game-miss text-muted-foreground": cellState === "miss",
       "hover:bg-game-hover cursor-pointer": isClickable && cellState === "empty",
       "cursor-not-allowed": !isClickable && gamePhase === "battle",
@@ -61,9 +68,9 @@ export function GameBoard({ board, airplanes, isOwn, onCellClick, onCellHover, g
     <div className="w-full max-w-full sm:w-auto sm:max-w-none sm:inline-block bg-card p-3 sm:p-4 rounded-lg mx-auto">
       {/* Column headers */}
       <div className="flex mb-1.5 sm:mb-2 w-full">
-        <div className="w-5 h-5 sm:w-7 sm:h-5 md:w-8 md:h-6 shrink-0" />
+        <div className="w-5 h-5 sm:w-7 sm:h-5 md:w-8 md:h-6 lg:w-10 lg:h-6 shrink-0" />
         {Array.from({ length: 10 }, (_, i) => (
-          <div key={i} className="flex-1 min-w-0 h-5 sm:flex-none sm:w-7 sm:h-5 md:w-8 md:h-6 flex items-center justify-center text-[10px] font-medium text-muted-foreground">
+          <div key={i} className="flex-1 min-w-0 h-5 sm:flex-none sm:w-7 sm:h-5 md:w-8 md:h-6 lg:w-10 lg:h-6 flex items-center justify-center text-fluid-label font-medium text-muted-foreground">
             {String.fromCharCode(65 + i)}
           </div>
         ))}
@@ -73,7 +80,7 @@ export function GameBoard({ board, airplanes, isOwn, onCellClick, onCellHover, g
       {board.map((row, rowIndex) => (
         <div key={rowIndex} className="flex w-full items-stretch">
           {/* Row header */}
-          <div className="w-5 sm:w-7 md:w-8 shrink-0 flex items-center justify-center text-[10px] font-medium text-muted-foreground">
+          <div className="w-5 sm:w-7 md:w-8 lg:w-10 shrink-0 flex items-center justify-center text-fluid-label font-medium text-muted-foreground">
             {rowIndex + 1}
           </div>
 
