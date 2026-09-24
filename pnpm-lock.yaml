@@ -8,12 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@cloudbase/js-sdk':
-        specifier: ^2.26.3
-        version: 2.26.3(@cloudbase/signature-nodejs@2.2.0)(jsonwebtoken@9.0.3)(ws@8.19.0)
-      '@cloudbase/node-sdk':
-        specifier: ^3.18.1
-        version: 3.18.1
       '@radix-ui/react-dialog':
         specifier: ^1.1.15
         version: 1.1.15(@types/react-dom@18.0.0)(@types/react@18.0.0)(react-dom@18.0.0(react@18.0.0))(react@18.0.0)
@@ -38,9 +32,6 @@ importers:
       geist:
         specifier: ^1.3.1
         version: 1.3.1(next@14.2.16(react-dom@18.0.0(react@18.0.0))(react@18.0.0))
-      jose:
-        specifier: ^5.9.6
-        version: 5.10.0
       lucide-react:
         specifier: ^0.454.0
         version: 0.454.0(react@18.0.0)
@@ -103,104 +94,6 @@ packages:
   '@ampproject/remapping@2.3.0':
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
-
-  '@cloudbase/adapter-interface@0.7.1':
-    resolution: {integrity: sha512-BjHTAvIMSLxbp26SeT6qLiSSBygz3kAVno/PMwwBwjgzVkVUvuZGVcvf1mhHxY/BjdRGLrd6X60OgvymV/aAUw==}
-
-  '@cloudbase/adapter-wx_mp@1.3.1':
-    resolution: {integrity: sha512-rS0N1aD1a0zc421ds17/HzM4RChQ6T2ixMz87bhPJ1yveqJt/KUqYxiXJDWhZ803wwTmJs8aqNkgugsNusNhbg==}
-
-  '@cloudbase/ai@2.23.0':
-    resolution: {integrity: sha512-0cXwq+LZHgA0vfSUudvcM0r1jZRyQmN+Dco6Dluw2djS1G0VnIlIiP276ToivCCNS83W5lvv7PKqspY+SeAj/A==}
-
-  '@cloudbase/ai@2.26.3':
-    resolution: {integrity: sha512-BtfKE+0184I7lohp0Egmlld5jEb7jcJ1tE+E/249fIFcUIK2Ei57EFmNV1QKiULqM2hrM4q+9ayLtMSQ8CCimA==}
-
-  '@cloudbase/analytics@2.26.3':
-    resolution: {integrity: sha512-xHbH5PD+Cd8ZLWl+2GcDfByd7YHl0Ua/kCEaaI/5AkwATYpc3dY/Xcd80JjiIEzCC/KlvF83yEeXr7Q1j3M0UA==}
-
-  '@cloudbase/apis@2.26.3':
-    resolution: {integrity: sha512-Rp8WrvaKnUSPjPJnd3D+FUaFL8emIF+ZaMsWSLicM6KnKUV4mqcFoTxn+AQeRW5HEsSUO78fUOyau4ZHVAUazw==}
-
-  '@cloudbase/app@2.23.0':
-    resolution: {integrity: sha512-H7KMKhzv4sVv7OpIkjh77DFQKY395aQ9NeScdTvYXD2b2u201YHKVprLaVRgP4N4kNj+xAH6WeA1bEM1OSzZaQ==}
-
-  '@cloudbase/app@2.26.3':
-    resolution: {integrity: sha512-W68H/bZPz8gT6iT1JyR4ENmpwpOjjokMHJaqBOjJ5Ie7BGKL/bO4nM3TwNSg4SYLuxZ8ALchbxVyyiPc5THYJg==}
-    peerDependencies:
-      '@cloudbase/signature-nodejs': '>=1.0.0'
-      jsonwebtoken: '>=8.0.0'
-      ws: ^8.18.0
-    peerDependenciesMeta:
-      '@cloudbase/signature-nodejs':
-        optional: true
-      jsonwebtoken:
-        optional: true
-      ws:
-        optional: true
-
-  '@cloudbase/auth@2.26.3':
-    resolution: {integrity: sha512-wvelULmMyIfoZyYcy//8vCfiPRH1uIO7AF+wu56rI/VskerQ7UNwtk8EwOmqUKaGd8JVAXDZPhj6PnfmT/W+1g==}
-
-  '@cloudbase/cloudrun@2.26.3':
-    resolution: {integrity: sha512-GNyKTTUuQQJ/bVPIH7YnTnPhPrvZjuE3gK4+S48iGVTUjd2Q+YJr3nPlY/rCMWPESxgGUOXigk8Uc+KHsaKQlQ==}
-
-  '@cloudbase/database@0.11.0':
-    resolution: {integrity: sha512-WgUsGqeoUaxcpzQ3vE/HrEcpbuXOPZMTrSRJoZUz6LEJnW47hbcIGF+XHaJnMtcRRM/gbgNGDAxChLYi1TatTg==}
-
-  '@cloudbase/database@1.4.3':
-    resolution: {integrity: sha512-JzmdsGjy9LwzSQQ0Fv4OlNHNK61BRXdJSembTpy4408AQA3q2Ip3N5eB3v9OpAlFMvP/6MGmOQ/ZuUPKfJddJA==}
-
-  '@cloudbase/functions@2.26.3':
-    resolution: {integrity: sha512-dgVo+GGsmA8Lp6339+5MrLycq7X2GGqXsGwz+CRtt6qt/7KgNWHJZYMJ0FR76x5d1OH2HRNnhXnYGn5IrlAYDQ==}
-
-  '@cloudbase/js-sdk@2.26.3':
-    resolution: {integrity: sha512-U8LqxRB4mjPUMYcpPs0rvxgoIJLsl+KHOPNtfyT03QPi3toMlr95/0zoCosCJW2xg3foK7WLglf4xlp5fvOjEw==}
-
-  '@cloudbase/model@2.26.3':
-    resolution: {integrity: sha512-0vTpr7B/+p8GflC/o9ftZrbR51FqVKvVrAfNPHSPMbsyd6ZMIVPTvvP4lIlf0Dxl6vv2irnEclg3aX34GNnS5w==}
-
-  '@cloudbase/mysql@2.26.3':
-    resolution: {integrity: sha512-jFA14TW0YRzR1d92eMh1+wNzPSN7ed3atbpxGWL9JuFLnnPBFYlT3hJG96F9Vy2Qal4VBpKyVMkZ4Lc+62qpBg==}
-
-  '@cloudbase/node-sdk@3.18.1':
-    resolution: {integrity: sha512-2EpGWY/DjvDzt8riCoeV9lTtispIfug2v9iiS7xouZZB95AjsQ+kywd86rMntIZ1qRzUCjbcbJn4+QCMWobgQQ==}
-    engines: {node: '>=12'}
-
-  '@cloudbase/oauth@2.26.3':
-    resolution: {integrity: sha512-1J5gzvpw11z0IsviTQRZbrFhW9P2BX+CFwRYKqBQC9Ii5v3eb2gkP1ixTiSpzIOzxfgWNVXUqHn8OWTPn8fviQ==}
-    peerDependencies:
-      '@cloudbase/utilities': 2.25.0
-
-  '@cloudbase/realtime@2.26.3':
-    resolution: {integrity: sha512-T0ouxlzYUXLxJG5sOlWMAcUBtyV9esM29n3ezp24ByQpraMF4GspS3Cxs6YE+/Z+K+o77rH6mdljuKfeWSNsIg==}
-
-  '@cloudbase/signature-nodejs@2.2.0':
-    resolution: {integrity: sha512-2y2rieOpJNnBA2MW7sLJKek3iFOjgr8TNicw5qjBkcdVczLR0cFzxMhip75NLCwarFTIAONE3oeNxoQ19eVHcA==}
-
-  '@cloudbase/storage@2.26.3':
-    resolution: {integrity: sha512-BBqoANDYktd79iNm44dprld2oObcpPwhjxkSyGL9mq25/LvKL4p6ajIKFwYdrH8WUPnD1LAwvNhMvltmvW2ETw==}
-
-  '@cloudbase/types@2.20.3':
-    resolution: {integrity: sha512-oBFj5hJ4eFc32OoOiE8UopL5lDacZReg56yNlbPGhoRLGbNe2Wk4QV+VeIo2n/TtVzo6Ctb7hQGmJ+peECIiuQ==}
-
-  '@cloudbase/types@2.23.0':
-    resolution: {integrity: sha512-FvqO+lspbzJWAL/fI2QwC2/HVgj523jxdqtWMjDF9ghiZ+JBIb2edLb1tbH5OhiMTvL9CW22Vl/0RJd93vR5ew==}
-
-  '@cloudbase/types@2.26.3':
-    resolution: {integrity: sha512-NtPpIplewz0q2LBt5XmVviAb+iey3TVa7ozDoxY320FYfECpW3+eznsELxvmPLiDSQwe5Oaruoxdt8srW16Qlg==}
-
-  '@cloudbase/utilities@2.20.3':
-    resolution: {integrity: sha512-SjRok91CfqiEHk1Mjzc9uW61CewssW3c8pjs+EPHb2et/C764W5mt3Gr2SP5yEw23X1HS50uNHXfWZu7ZbG4AQ==}
-
-  '@cloudbase/utilities@2.23.0':
-    resolution: {integrity: sha512-J+1TYH3Pbyn2GY0QamvFdzFoxZcPvvkDMaE2ivUdTiXg2LfxOO0RMYMv89afKagrtiZTN4hKCIV7rpAfgrDmzQ==}
-
-  '@cloudbase/utilities@2.26.3':
-    resolution: {integrity: sha512-Sn80NYuPASe+qdXmdY8iUV/8c0/uCWkQPW0zv/0J7+l+tnp4atGqSWm0xL4gNojgctLBTLqfc4DR6EGJweo7yg==}
-
-  '@cloudbase/wx-cloud-client-sdk@1.7.1':
-    resolution: {integrity: sha512-NzLOoYDAeoRh2lRjCtvr6yXu4KPVHqZtPxyv70e+3b2+dZIDE5S5gtU8daE7xS5u4TwPqKB/E2vmgRTYOsCS9w==}
 
   '@emnapi/core@1.9.0':
     resolution: {integrity: sha512-0DQ98G9ZQZOxfUcQn1waV2yS8aWdZ6kJMbYCJB3oUBecjWYO1fqJ+a1DRfPF3O5JEkwqwP1A9QEN/9mYm2Yd0w==}
@@ -1916,9 +1809,6 @@ packages:
     resolution: {integrity: sha512-VXe6RjJkBPj0ohtqaO8vSWP3ZhAKo66fKrFNCll4BTcwljPLz03pCbaNKfzGP5MbrCYcbJ7v0nOYYwUzTEIdXQ==}
     hasBin: true
 
-  jose@5.10.0:
-    resolution: {integrity: sha512-s+3Al/p9g32Iq+oqXxkW//7jk2Vig6FF1CFqzVXoTUXt2qz89YWbL+OwS17NFYEvxC35n0FKeGO2LGYSxeM2Gg==}
-
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
 
@@ -2712,200 +2602,6 @@ snapshots:
     dependencies:
       '@jridgewell/gen-mapping': 0.3.13
       '@jridgewell/trace-mapping': 0.3.31
-
-  '@cloudbase/adapter-interface@0.7.1': {}
-
-  '@cloudbase/adapter-wx_mp@1.3.1':
-    dependencies:
-      '@cloudbase/adapter-interface': 0.7.1
-      web-streams-polyfill: 4.2.0
-
-  '@cloudbase/ai@2.23.0':
-    dependencies:
-      '@cloudbase/types': 2.23.0
-      '@cloudbase/utilities': 2.23.0
-      '@mattiasbuelens/web-streams-adapter': 0.1.0
-      text-encoding-shim: 1.0.5
-      web-streams-polyfill: 4.2.0
-
-  '@cloudbase/ai@2.26.3':
-    dependencies:
-      '@cloudbase/types': 2.26.3
-      '@cloudbase/utilities': 2.26.3
-      '@mattiasbuelens/web-streams-adapter': 0.1.0
-      text-encoding-shim: 1.0.5
-      web-streams-polyfill: 4.2.0
-
-  '@cloudbase/analytics@2.26.3':
-    dependencies:
-      '@cloudbase/types': 2.26.3
-      '@cloudbase/utilities': 2.26.3
-
-  '@cloudbase/apis@2.26.3':
-    dependencies:
-      '@cloudbase/types': 2.26.3
-      '@cloudbase/utilities': 2.26.3
-
-  '@cloudbase/app@2.23.0':
-    dependencies:
-      '@cloudbase/adapter-interface': 0.7.1
-      '@cloudbase/adapter-wx_mp': 1.3.1
-      '@cloudbase/types': 2.23.0
-      '@cloudbase/utilities': 2.23.0
-
-  '@cloudbase/app@2.26.3(@cloudbase/signature-nodejs@2.2.0)(jsonwebtoken@9.0.3)(ws@8.19.0)':
-    dependencies:
-      '@cloudbase/adapter-interface': 0.7.1
-      '@cloudbase/adapter-wx_mp': 1.3.1
-      '@cloudbase/types': 2.26.3
-      '@cloudbase/utilities': 2.26.3
-    optionalDependencies:
-      '@cloudbase/signature-nodejs': 2.2.0
-      jsonwebtoken: 9.0.3
-      ws: 8.19.0
-
-  '@cloudbase/auth@2.26.3':
-    dependencies:
-      '@cloudbase/adapter-wx_mp': 1.3.1
-      '@cloudbase/oauth': 2.26.3(@cloudbase/utilities@2.26.3)
-      '@cloudbase/utilities': 2.26.3
-
-  '@cloudbase/cloudrun@2.26.3':
-    dependencies:
-      '@cloudbase/adapter-interface': 0.7.1
-      '@cloudbase/types': 2.26.3
-      '@cloudbase/utilities': 2.26.3
-
-  '@cloudbase/database@0.11.0':
-    dependencies:
-      bson: 7.2.0
-
-  '@cloudbase/database@1.4.3':
-    dependencies:
-      bson: 4.7.2
-      lodash.clonedeep: 4.5.0
-      lodash.set: 4.3.2
-      lodash.unset: 4.5.2
-
-  '@cloudbase/functions@2.26.3':
-    dependencies:
-      '@cloudbase/adapter-interface': 0.7.1
-      '@cloudbase/cloudrun': 2.26.3
-      '@cloudbase/types': 2.26.3
-      '@cloudbase/utilities': 2.26.3
-
-  '@cloudbase/js-sdk@2.26.3(@cloudbase/signature-nodejs@2.2.0)(jsonwebtoken@9.0.3)(ws@8.19.0)':
-    dependencies:
-      '@cloudbase/adapter-interface': 0.7.1
-      '@cloudbase/ai': 2.26.3
-      '@cloudbase/analytics': 2.26.3
-      '@cloudbase/apis': 2.26.3
-      '@cloudbase/app': 2.26.3(@cloudbase/signature-nodejs@2.2.0)(jsonwebtoken@9.0.3)(ws@8.19.0)
-      '@cloudbase/auth': 2.26.3
-      '@cloudbase/cloudrun': 2.26.3
-      '@cloudbase/database': 0.11.0
-      '@cloudbase/functions': 2.26.3
-      '@cloudbase/model': 2.26.3
-      '@cloudbase/mysql': 2.26.3
-      '@cloudbase/realtime': 2.26.3
-      '@cloudbase/storage': 2.26.3
-      '@cloudbase/types': 2.26.3
-      '@cloudbase/utilities': 2.26.3
-    transitivePeerDependencies:
-      - '@cloudbase/signature-nodejs'
-      - jsonwebtoken
-      - ws
-
-  '@cloudbase/model@2.26.3':
-    dependencies:
-      '@cloudbase/types': 2.26.3
-      '@cloudbase/utilities': 2.26.3
-      '@cloudbase/wx-cloud-client-sdk': 1.7.1
-
-  '@cloudbase/mysql@2.26.3':
-    dependencies:
-      '@cloudbase/types': 2.20.3
-      '@cloudbase/utilities': 2.20.3
-      '@cloudbase/wx-cloud-client-sdk': 1.7.1
-
-  '@cloudbase/node-sdk@3.18.1':
-    dependencies:
-      '@cloudbase/ai': 2.23.0
-      '@cloudbase/app': 2.23.0
-      '@cloudbase/database': 1.4.3
-      '@cloudbase/signature-nodejs': 2.2.0
-      '@cloudbase/types': 2.23.0
-      '@cloudbase/wx-cloud-client-sdk': 1.7.1
-      agentkeepalive: 4.6.0
-      axios: 0.27.2
-      form-data: 4.0.5
-      http-proxy-agent: 5.0.0
-      https-proxy-agent: 5.0.1
-      jsonwebtoken: 9.0.3
-      retry: 0.13.1
-      web-streams-polyfill: 4.2.0
-      ws: 8.19.0
-      xml2js: 0.6.2
-    transitivePeerDependencies:
-      - bufferutil
-      - debug
-      - supports-color
-      - utf-8-validate
-
-  '@cloudbase/oauth@2.26.3(@cloudbase/utilities@2.26.3)':
-    dependencies:
-      '@cloudbase/utilities': 2.26.3
-
-  '@cloudbase/realtime@2.26.3':
-    dependencies:
-      '@cloudbase/types': 2.26.3
-      lodash: 4.17.23
-
-  '@cloudbase/signature-nodejs@2.2.0':
-    dependencies:
-      '@types/clone': 2.1.4
-      clone: 2.1.2
-      is-stream: 2.0.1
-      url: 0.11.4
-
-  '@cloudbase/storage@2.26.3':
-    dependencies:
-      '@cloudbase/types': 2.26.3
-      '@cloudbase/utilities': 2.26.3
-
-  '@cloudbase/types@2.20.3':
-    dependencies:
-      '@cloudbase/adapter-interface': 0.7.1
-
-  '@cloudbase/types@2.23.0':
-    dependencies:
-      '@cloudbase/adapter-interface': 0.7.1
-
-  '@cloudbase/types@2.26.3':
-    dependencies:
-      '@cloudbase/adapter-interface': 0.7.1
-
-  '@cloudbase/utilities@2.20.3':
-    dependencies:
-      '@cloudbase/adapter-interface': 0.7.1
-      '@cloudbase/types': 2.20.3
-      jwt-decode: 3.1.2
-
-  '@cloudbase/utilities@2.23.0':
-    dependencies:
-      '@cloudbase/adapter-interface': 0.7.1
-      '@cloudbase/types': 2.23.0
-      jwt-decode: 3.1.2
-
-  '@cloudbase/utilities@2.26.3':
-    dependencies:
-      '@cloudbase/adapter-interface': 0.7.1
-      '@cloudbase/types': 2.26.3
-      jwt-decode: 3.1.2
-
-  '@cloudbase/wx-cloud-client-sdk@1.7.1':
-    dependencies:
-      core-js-pure: 3.48.0
 
   '@emnapi/core@1.9.0':
     dependencies:
@@ -4695,8 +4391,6 @@ snapshots:
       '@pkgjs/parseargs': 0.11.0
 
   jiti@2.6.0: {}
-
-  jose@5.10.0: {}
 
   js-tokens@4.0.0: {}
 
