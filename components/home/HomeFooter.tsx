@@ -7,7 +7,7 @@ export function HomeFooter() {
         <div className="flex items-center gap-2">
           <span className="font-bold text-foreground">YQYMONs STUDIO</span>
           <span className="hidden sm:inline">·</span>
-          <span className="hidden sm:inline">YQYMONs游戏工作室</span>
+          <span className="hidden sm:inline">游戏工作室</span>
         </div>
         <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-1">
           <span>像素美术 / 主设：NIRVAZURE</span>
