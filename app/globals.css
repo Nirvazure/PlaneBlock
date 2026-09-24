@@ -13,6 +13,13 @@
   --nes-text: #ffffff;
   --nes-text-muted: #888888;
 
+  --player-one: #70c1cc;
+  --player-one-plane: #397d86;
+  --player-one-head: #93d5dc;
+  --player-two: #e0b267;
+  --player-two-plane: #876334;
+  --player-two-head: #f0cd89;
+
   --background: var(--nes-bg);
   --foreground: var(--nes-text);
   --card: var(--nes-panel);
@@ -51,7 +58,7 @@
   --nes-border: 3px;
   --nes-border-thick: 4px;
 
-  /* Game specific - B&W */
+  /* Neutral attack states with restrained player accents */
   --game-grid: var(--nes-border-dark);
   --game-water: #0a0a0a;
   --game-hit: #555555;
@@ -111,6 +118,12 @@
   --color-game-airplane-head: var(--game-airplane-head);
   --color-game-hover: var(--game-hover);
   --color-game-destroyed: var(--game-destroyed);
+  --color-player-one: var(--player-one);
+  --color-player-one-plane: var(--player-one-plane);
+  --color-player-one-head: var(--player-one-head);
+  --color-player-two: var(--player-two);
+  --color-player-two-plane: var(--player-two-plane);
+  --color-player-two-head: var(--player-two-head);
 }
 
 @layer base {
@@ -122,6 +135,20 @@
     image-rendering: pixelated;
     image-rendering: -moz-crisp-edges;
     image-rendering: crisp-edges;
+  }
+}
+
+@layer utilities {
+  .text-fluid-label {
+    font-size: clamp(0.75rem, calc(0.72rem + 0.18vw), 0.875rem);
+  }
+
+  .text-fluid-body {
+    font-size: clamp(0.875rem, calc(0.82rem + 0.35vw), 1rem);
+  }
+
+  .text-fluid-heading {
+    font-size: clamp(1rem, calc(0.92rem + 0.5vw), 1.25rem);
   }
 }
 
